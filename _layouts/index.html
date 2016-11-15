@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>{{page.title}}</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <script type="text/javascript">
+        function selectText() {
+            if (document.selection) {
+                var range = document.body.createTextRange();
+                range.moveToElementText(document.getElementById('selectable'));
+                range.select();
+            } else if (window.getSelection) {
+                var range = document.createRange();
+                range.selectNode(document.getElementById('selectable'));
+                window.getSelection().addRange(range);
+            }
+        }
+    </script>
+
+    <script src="javascripts/jquery-3.1.1.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.get("https://api.github.com/repos/metos3d/metos3d/tags",
+                function(data, status){
+                    $("#metos3d").text(data[0].name);})
+            $.get("https://api.github.com/repos/metos3d/simpack/tags",
+                function(data, status){
+                    $("#simpack").text(data[0].name);})
+            $.get("https://api.github.com/repos/metos3d/model/tags",
+                function(data, status){
+                    $("#model").text(data[0].name);})
+            $.get("https://api.github.com/repos/metos3d/data/tags",
+                function(data, status){
+                    $("#data").text(data[0].name);})
+        });
+    </script>
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <img style="margin: -14px 8px 0px -10px;float: left;" src="images/m3d-logo-460x460.png" height="80" width="80">
+        <h1>{{page.head.title}}</h1>
+        <p style="width: 100%;">{{page.head.subtitle}}</p>
+        <ul>
+          <li><a href="https://github.com/metos3d/">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+
+          <h3>Welcome</h3>
+
+          <p>Metos3D is a collection of simulation software, models and data
+          intended to be used for simulation and optimization of marine
+          ecosystem models. Metos3D is organized in separate git repositories.
+          The current versions are:
+          <table>
+              <tr>
+                  <td><a href="https://github.com/metos3d/metos3d">metos3d</a></td>
+                  <td><div id="metos3d"><img src="images/progress.gif" height="15" width="15"></div></td>
+                  <td>main script, should be run as a shell command</td>
+              </tr>
+              <tr>
+                  <td><a href="https://github.com/metos3d/simpack">simpack</a></td>
+                  <td><div id="simpack"><img src="images/progress.gif" height="15" width="15"></div></td>
+                  <td>main software, transport driver</td>
+              </tr>
+              <tr>
+                  <td><a href="https://github.com/metos3d/model">model</a></td>
+                  <td><div id="model"><img src="images/progress.gif" height="15" width="15"></div></td>
+                  <td>marine biogeochemical/ecosystem models</td>
+              </tr>
+              <tr>
+                  <td><a href="https://github.com/metos3d/data">data</a></td>
+                  <td><div id="data"><img src="images/progress.gif" height="15" width="15"></div></td>
+                  <td>geometry data, forcing data, transport matrices</td>
+              </tr>
+          </table></p>
+
+        <h3>Installation</h3>
+
+          <p>To install the toolkit, just paste the
+          following line into your terminal:
+          (<a href="https://www.python.org/">python 2.7</a> and
+          <a href="http://curl.haxx.se">curl</a> required):</p>
+
+          <pre><code id="selectable" onClick="selectText()">python -c "$(curl -fsSL https://raw.github.com/metos3d/metos3d/go/install.py)"</code></pre>
+
+          <h3>Documentation</h3>
+          
+          <p style="margin-bottom: 10px;">The main scientific document can be found at:</p>
+          <p style="margin-left: 10px;"><a href="http://www.geosci-model-dev.net/9/3729/2016/">http://www.geosci-model-dev.net/9/3729/2016/</a></p>
+
+          <p style="margin-bottom: 10px;">A technical report explaining the 'matrix' command can be found at:</p>
+          <p style="margin-left: 10px;"><a href="http://www.uni-kiel.de/journals/receive/jportal_jparticle_00000291">http://www.uni-kiel.de/journals/receive/jportal_jparticle_00000291</a></p>
+
+          <p> Additionally, each repository consists of a documentation folder named 'doc'.
+          Quick access:
+          <table width="60%">
+              <tr>
+                  <td>Simulation package:</td>
+                  <td><a href="https://github.com/metos3d/simpack/raw/master/doc/metos3d-simpack.pdf">metos3d-simpack.pdf</a></td>
+              </tr>
+              <tr>
+                  <td>Model package:</td>
+                  <td><a href="https://github.com/metos3d/model/raw/master/doc/metos3d-model.pdf">metos3d-model.pdf</a></td>
+              </tr>
+              <tr>
+                  <td>Data package:</td>
+                  <td><a href="https://github.com/metos3d/data/raw/master/doc/metos3d-data.pdf">metos3d-data.pdf</a></td>
+              </tr>
+          </table></p>
+          
+          <h3>PETSc</h3>
+
+          <p>Metos3D needs the
+          <a href="http://www.mcs.anl.gov/petsc/">Portable, Extensible Toolkit for Scientific Computation</a> (PETSc)
+          to run. Here, <a href="{{page.petsc.link}}">version {{page.petsc.version}}</a> is required.
+          </p>
+          
+          <h3>Authors and Contributors</h3>
+
+          <p>The software is written and mainted by Jaroslaw Piwonski
+          (<a href="mailto:jpi@informatik.uni-kiel.de">jpi@informatik.uni-kiel.de</a>).
+          The original data is provided by Samar Khatiwala
+          (<a href="mailto:spk@ldeo.columbia.edu">spk@ldeo.columbia.edu</a>)
+          as part of the
+          <a href="http://www.ldeo.columbia.edu/~spk/Research/TMM/">Transport Matrix Method</a>.
+          
+          <p>The homepage concept is copied from
+          <a href="http://pages.github.com/">GitHub Pages</a> and the
+          <a href="http://brew.sh/">homebrew</a> project.
+          
+          </p>
+
+          <h3>Support or Contact</h3>
+
+          <p>Have trouble installing Metos3D? Contact
+          <a href="mailto:jpi@informatik.uni-kiel.de">Jaroslaw Piwonski</a>,
+          attach the output of the script and kindly ask for help.
+          </p>
+
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/jpicau">jpicau</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
